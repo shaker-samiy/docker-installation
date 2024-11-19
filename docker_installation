@@ -1,0 +1,116 @@
+#-----------------Basic steps to run docker ------------------
+
+# [1_Nov._2024]  [shaker sami] [shaker.samiy@gmail.com]   [+201068448613 -  +201117518670]
+
+
+#Docker installiation
+docker website to install docker 
+https://docs.docker.com/desktop/
+
+#for linux
+https://docs.docker.com/desktop/setup/install/linux/
+
+#for fedora
+sudo dnf install gnome-terminal
+
+
+----------------------------------------------------------------------------
+Prerequisites
+
+>sudo dnf install gnome-terminal
+
+
+#---------Install Docker Desktop-------
+
+To install Docker Desktop on Fedora:
+
+# ----------1- Set up Docker's package repository.
+
+
+#Set up the repository:
+
+>sudo dnf -y install dnf-plugins-core   #  (dnf-plugins-core)optional modules that provide additional features to the DNF package manager
+
+>sudo dnf-3 config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo     
+
+#Install the Docker packages:
+>sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+
+# Notes:
+"""  
+all of the following are packages:
+docker-ce:docker community edition  
+docker-ce-cli:docker command line interface
+container: core container runtime used by docker(responsible for starting, stopping and monitoring containers)
+docker-buildx-plugin: for bulding docker imaages in more complex workflows(multi-platform builds, advanced cashing, distributed builds)
+docker-compose-plugin:allow users to define and manage multi -container applications using YAML file
+"""
+
+
+#Start Docker Engine:
+>sudo systemctl enable --now docker  #let docker start auomatically adfter booting
+
+Notes:
+systemctl: command-line tool for controlling systemd service managerused to managed system services, such as 
+starting, enabling, or disabling them
+--now: a combination of the enable and start commands
+	ensure thatthe servicee is enabled and started immedialty without requiring separtyed start
+
+>sudo systemctl start docker    
+
+#Verify that the installation is successful by running the hello-world image:
+
+>sudo docker run hello-world        
+
+page reference:
+https://docs.docker.com/engine/install/fedora/#set-up-the-repository
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+# ---------- 2- Download the latest RPM package. For checksums, see the Release notes.
+
+https://docs.docker.com/desktop/setup/install/linux/fedora/
+
+
+# ---------- 3- Install the package with dnf as follows:----------------
+
+>sudo dnf install ./docker-desktop-x86_64.rpm
+
+please you need to check that the downloaded package in same directory where is your terminal
+you can use ls to list all files and folders in the path where you are
+-----------------------------------
+
+# -----------launch doxcker -----------------
+>systemctl --user start docker-desktop
+
+
+
+
+#-------------check the version of docker------------
+>docker --version
+
+
+#----------- to stop docker-----------
+>systemctl --user stop docker-desktop
+
+
+
+#-----------to check running or suspended containers --------------
+>docker ps  -a      #(ps means process status)
+
+
+#-----------to stop containers --------------
+>docker stop <container_id>
+note: 
+you get the container id from the pervious step command
+
+#-----------to remove containers forever --------------
+$ docker rm <container_id>
+
+
+
+#------------to opena terminal in docker---------
+docker exec -it airflow /bin/bash
+
+
